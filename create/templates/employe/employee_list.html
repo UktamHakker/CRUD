@@ -8,7 +8,9 @@
             <td>Mobile</td>
             <td>Position</td>
             <td>
-                <a href="{% url 'employee_insert' %}" class='btn btn-success btn-block btn-lg'>ADD</a>
+                <a href="{% url 'employee_insert' %}" class='btn btn-success btn-block btn-lg'>
+                    <i class="fa-solid fa-circle-plus"></i>
+                </a>
             </td>
         </tr>
     </thead>
@@ -19,16 +21,25 @@
             <td>{{employee.mobile}}</td>
             <td>{{employee.postion}}</td>
             <td>
-                <a href="{% url 'employee_update' employee.id %}" class='btn btn-primary btn-block '>EDIT</a>
+                <a href="{% url 'employee_update' employee.id %}" class='btn btn-primary btn-block '>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </a>
 
-
-                <form action="{% url 'employee_delete' employee.id %}" method="POST">
+                <form action="{% url 'employee_delete' employee.id %}" method="POST" onsubmit="return confirmDelete()">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn btn-danger btn-block ">DELETE</button>
+                    <button type="submit" class="btn btn btn-danger btn-block ">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
                 </form>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+<script>
+function confirmDelete() {
+    return confirm("Siz haqiqatdan ham bu ma'lumotni o'chirmoqchimisiz?");
+}
+</script>
 {% endblock %}
